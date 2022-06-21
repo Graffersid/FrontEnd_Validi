@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 const LandingPage = () => {
     return (
         <>
-            <div className="container">
+        <h1>LandingPage</h1>
+            {/* <div className="container">
                 <nav className="navbar navbar-light bg-light justify-content-between">
                     <p className="navbar-brand">VALIDI.ME</p>
                     <form className="form-inline">
@@ -12,7 +13,7 @@ const LandingPage = () => {
                         <button className='btn btn-primary'> Signup</button>
                     </form>
                 </nav>
-            </div>
+            </div> */}
         </>
     )
 }
