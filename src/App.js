@@ -18,6 +18,9 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/info' element={<InfoForm />} />
         </Routes>
+        <footer>
+          <p>© 2022 Idea Validation. All Rights Reserved</p>
+        </footer>
       </Router>
 
     </div>

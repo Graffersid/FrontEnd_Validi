@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './Login.css';
+import './Signup.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock, faKey } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
@@ -12,22 +13,32 @@ const Login = () => {
     password: '',
   })
 
+  const [login, setLogin] = useState(false)
+
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
   }
+
+  const loginHandler = () => {
+    setLogin(true)
+  }
   return (
-    <div className="container-fluid login-background">
+    <div className="container-fluid login-background" style={{ display: "flex", justifyContent: "space-around"}} >
       <div className='logo'>
         <img src={logo} alt="" height="100%" width="100%" />
         <p className='comment'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempor at ut tincidunt elementum enim Facilisis posuere ornare.</p>
       </div>
+      <div className='checkk'>
+      <div className='log-main'>
       <div className='login-main'>
         <div className="card login-child">
           <div className="card-body">
             <h1>Login</h1>
-            <p>Don't have an account? <Link to="/signup" className='redirect' style={{textDecoration:"none"}}>Sign Up</Link></p>
-            <button className='btn g-button'><FontAwesomeIcon icon={faKey} size="1x" /> SignUp with Google</button>
-            <div className='line_text'> Also Login With </div>
+            <p>Don't have an account? <Link to="/signup" className='redirect' style={{ textDecoration: "none" }}>Sign Up</Link></p>
+            <button className='btn g-button'><FontAwesomeIcon icon={faKey} size="1x" /> Login with Google</button>
+            {login ? <div className='line_text'> Also Signup With </div> : ""}
+            {login ? "" : <button onClick={loginHandler} className="btn g-button"><FontAwesomeIcon icon={faEnvelope} size="2px" /> Login with mail </button>}
+            <div className={login ? "after" : "before"}>
             <p className='line'>  </p>
             <form>
               <div className="form-group input-group">
@@ -48,10 +59,13 @@ const Login = () => {
               </div>
               <div className='d-flex justify-content-end text-center mt-3' >
                 <p className="small mb-5 pb-lg-2 mx-auto forget-pass"><a className="text-muted" href="#!">Forgot password?</a></p>
-                <Link to="#"><button type="submit" className="btn btn-login" style={{textDecoration:"none"}}>Next</button></Link>
+                <Link to="#"><button type="submit" className="btn btn-login" style={{ textDecoration: "none" }}>Next</button></Link>
               </div>
             </form>
+            </div>
           </div>
+        </div>
+        </div>
         </div>
       </div>
     </div>

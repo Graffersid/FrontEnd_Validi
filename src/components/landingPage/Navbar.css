@@ -10,3 +10,9 @@ top: 30px; */
 .btn-nav {
     color: #FFFFFF !important;
 }
+
+footer {
+    text-align: center;
+    padding: 3px;
+    color: white;
+  }
