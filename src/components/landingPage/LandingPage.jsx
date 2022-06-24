@@ -1,19 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import './LandingPage.css';
 const LandingPage = () => {
     return (
         <>
-        <h1>LandingPage</h1>
-            {/* <div className="container">
-                <nav className="navbar navbar-light bg-light justify-content-between">
-                    <p className="navbar-brand">VALIDI.ME</p>
-                    <form className="form-inline">
-                        <Link to="/login"><button className="btn btn-success my-2 my-sm-0 mx-2" type="submit">Login</button></Link>
-                        <button className='btn btn-primary'> Signup</button>
-                    </form>
-                </nav>
-            </div> */}
+            <div className="container-fluid background-landing">
+                <div className='idea-text'>
+                    <div>
+                        What’s your
+                    </div>
+                    <div className='new-text'>New IDea</div>
+                </div>
+                <p className='text'>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempor at ut tincidunt elementum enim.  </p>
+                <button className='btn share-btn'>share idea</button>
+            </div>
         </>
     )
 }
