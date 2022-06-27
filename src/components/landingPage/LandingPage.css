@@ -76,3 +76,11 @@ text-transform: uppercase;
 
 color: #FFFFFF;
 }
+
+.logo1{
+  position: relative;
+  width: 490px;
+  height: 456px;
+  left: 30px;
+  top: 332px;
+}

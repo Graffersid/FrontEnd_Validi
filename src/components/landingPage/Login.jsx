@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock, faKey } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import logo from "../../asset/manLogo.png"
+import axios from 'axios';
+
 
 
 const Login = () => {
@@ -16,19 +18,36 @@ const Login = () => {
   const [login, setLogin] = useState(false)
 
   const handleChange = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value })
+    setState({[e.target.name]: e.target.value })
   }
 
   const loginHandler = () => {
     setLogin(true)
   }
+
+  const handler = async (e) => {
+    e.preventDefault();
+    await axios({
+        url: "http://192.168.1.79:9090/api/v1/login",
+        method: "POST",
+        headers: { "content-Type": "application/json" },
+        data: state
+
+    }).then((res) => {
+        alert(res.data.message)
+        localStorage.setItem("userInfo", JSON.stringify(res))
+        console.log(res,"login--------")
+    }).catch(() => console.log(alert("invalid Details")))
+}
+
+
   return (
     <div className="container-fluid login-background" style={{ display: "flex", justifyContent: "space-around"}} >
       <div className='logo'>
         <img src={logo} alt="" height="100%" width="100%" />
         <p className='comment'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempor at ut tincidunt elementum enim Facilisis posuere ornare.</p>
       </div>
-      <div className='checkk'>
+      <div className='check-log'>
       <div className='log-main'>
       <div className='login-main'>
         <div className="card login-child">
@@ -40,7 +59,7 @@ const Login = () => {
             {login ? "" : <button onClick={loginHandler} className="btn g-button"><FontAwesomeIcon icon={faEnvelope} size="2px" /> Login with mail </button>}
             <div className={login ? "after" : "before"}>
             <p className='line'>  </p>
-            <form>
+            <form onSubmit={handler}>
               <div className="form-group input-group">
                 <div className="input-group-prepend">
                   <span className="input-group-text">
@@ -59,7 +78,7 @@ const Login = () => {
               </div>
               <div className='d-flex justify-content-end text-center mt-3' >
                 <p className="small mb-5 pb-lg-2 mx-auto forget-pass"><a className="text-muted" href="#!">Forgot password?</a></p>
-                <Link to="#"><button type="submit" className="btn btn-login" style={{ textDecoration: "none" }}>Next</button></Link>
+                <button type="submit" className="btn btn-login" style={{ textDecoration: "none" }}>Next</button>
               </div>
             </form>
             </div>
