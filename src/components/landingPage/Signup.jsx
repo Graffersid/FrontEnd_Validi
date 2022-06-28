@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Signup.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock, faUser, faPhone, faKey } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from "../../asset/manLogo.png"
 import { signUp } from '../../service/api';
 
@@ -16,6 +16,7 @@ const Signup = () => {
         confirmPassword: ''
     })
     const [signup, setSignup] = useState(false)
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         setState({ ...state, [e.target.name]: e.target.value })
@@ -24,6 +25,8 @@ const Signup = () => {
     const handler = async (e) => {
         e.preventDefault();
         await signUp(state)
+        navigate("/info")
+
     }
 
     const signupHandler = () => {
