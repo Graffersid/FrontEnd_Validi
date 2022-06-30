@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './InfoForm.css';
 import axios from 'axios';
+import { useSelector } from 'react-redux'
 
 const InfoForm = () => {
 
@@ -16,10 +17,7 @@ const InfoForm = () => {
   const [state, setState] = useState("")
   const [states, setStates] = useState([]);
   const [city, setCity] = useState("")
-
-  // const [maritalStatus, setMaritalStatus] = useState("")
-  // const [occupation, setOccupation] = useState("")
-  // const [expertise, setExpertise] = useState("")
+  const id = useSelector((state) => state.signupReducer.signup_response.data.userId);
 
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value })
@@ -68,17 +66,18 @@ const InfoForm = () => {
       }
     }
   }
-  const data = { age:info.age, gender:info.gender, country, state, city}
+  const data = { userId: id, age: info.age, gender: info.gender, maritalStatus: info.maritalStatus, occupation: info.occupation, experties: info.expertise, country, state, city }
   console.log(data, "info")
 
-  const handler = async() => {
+  const handler = async (e) => {
+    e.preventDefault();
     try {
-      let response = await axios.post("http://192.168.1.79/api/v1/uploadProfilePicture", data);
-      console.log(response,"response")
+      let response = await axios.put("http://192.168.1.79/api/v1/updateProfile", data);
+      console.log(response, "response")
       return response.data;
-  } catch (error) {
+    } catch (error) {
       console.log('Error while calling getPosts API ', error)
-  }
+    }
   }
 
   return (

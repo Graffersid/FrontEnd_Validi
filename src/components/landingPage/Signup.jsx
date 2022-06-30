@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
+import axios from 'axios';
+import { Sign_up } from "../../action"
+import { useDispatch, useSelector } from 'react-redux'
 import './Signup.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock, faUser, faPhone, faKey } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from "../../asset/manLogo.png"
-import { signUp } from '../../service/api';
 
 
 const Signup = () => {
+
     const [state, setState] = useState({
         fullName: '',
         email: '',
@@ -17,6 +20,8 @@ const Signup = () => {
     })
     const [signup, setSignup] = useState(false)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const status = useSelector((state) => state.signupReducer.signup_response.status);
 
     const handleChange = (e) => {
         setState({ ...state, [e.target.name]: e.target.value })
@@ -24,8 +29,18 @@ const Signup = () => {
 
     const handler = async (e) => {
         e.preventDefault();
-        await signUp(state)
-        navigate("/info")
+        try {
+            let response = await axios.post("http://192.168.1.79/api/v1/signup", state);
+            console.log(response.data, "Signup_response")
+            dispatch(Sign_up(response.data));
+        }
+        catch (error) {
+            console.log('Error while calling getPosts API ', error)
+        }
+        if (status === "true") {
+            console.log(status,"nexttttt")
+            navigate("/info")
+        }
 
     }
 
